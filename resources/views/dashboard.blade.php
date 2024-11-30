@@ -4,8 +4,12 @@
 
 <div class="container mt-5">
     <div class="row justify-content-center">
+    <p>
         Hello, {{auth()->user()->name}}
-        <p>Your trial will expire on {{auth()->user()->user_trial}}</p>
+        @if (auth()->user()->user_type == 'employer')
+        Your trial will expire on {{auth()->user()->user_trial}}
+        @endif
+        </p>
 
         <div class="col-md-3">
             <div class="card-counter primary">

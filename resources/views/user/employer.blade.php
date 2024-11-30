@@ -7,12 +7,13 @@
         <div class="col-md-6">
             <h1>Looking for an employee?</h1>
             <h3>Please create an account</h3>
-            <img src="{{asset('image/register.png')}}">
+            <img src="{{asset('image/register.jpg')}}">
         </div>
 
         <div class="col-md-6">
             <div class="card" id="card">
                 <div class="card-header">Employer Registration</div>
+
                 <form action="{{route('store.employer')}}" method="post" id="">@csrf
                     <div class="card-body">
                         <div class="form-group">

@@ -17,9 +17,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::get('/', function () {
+"Route::get('/', function () {
     return view('welcome');
-});
+});";
 
 
 Route::get('/users', function () {
@@ -38,8 +38,8 @@ Route::post('/register/Employer', [UserController::class,'storeEmployer'])->name
 
 
 
-Route::get('/login', [UserController::class,'login'])->name('login');
-Route::post('/register/Seeker', [UserController::class,'postLogin'])->name('login.post');
+Route::get('/', [UserController::class,'login'])->name('login');
+Route::post('/Login', [UserController::class,'postLogin'])->name('login.post');
 Route::post('/logout', [UserController::class,'logout'])->name('logout');
 
 Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
