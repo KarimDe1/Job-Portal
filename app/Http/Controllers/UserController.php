@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Http\requests\RegistrationFormRequest;
 
 use App\Http\requests\SeekerLoginRequest;
-use illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -42,20 +43,22 @@ class UserController extends Controller
     public function storeSeeker(RegistrationFormRequest $request)
     {
         
-        User::create([
+        $user = User::create([
             'name'=> request('name'),
             'email'=> request('email'),
             'password'=> bcrypt(request('password')),
             'user_type'=>self::JOB_SEEKER
 
         ]);
-        return redirect()->route('login')->with('successMessage','Your account has been created successfully');
+        Auth::login($user);
+        $user->sendEmailVerificationNotification();
+        return redirect()->route('verification.notice')->with('successMessage','Your account was created');
     }
 
     public function storeEmployer(RegistrationFormRequest $request)
     {
         
-        User::create([
+        $user = User::create([
             'name'=> request('name'),
             'email'=> request('email'),
             'password'=> bcrypt(request('password')),
@@ -63,10 +66,12 @@ class UserController extends Controller
             'user_trial'=>now()->addWeek()
 
         ]);
-        return redirect()->route('login')->with('successMessage','Your account has been created successfully');
+        Auth::login($user);
+        $user->sendEmailVerificationNotification();
+        return redirect()->route('verification.notice')->with('successMessage','Your account was created');
     }
 
-
+    
 
 
     public function login()

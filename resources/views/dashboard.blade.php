@@ -7,7 +7,7 @@
     <p>
         Hello, {{auth()->user()->name}}
         @if (auth()->user()->user_type == 'employer')
-        Your trial will expire on {{auth()->user()->user_trial}}
+        Your trial {{now()->format('Y-m-d') > auth()->user()->user_trial ? 'was expired': 'will expire'}} on {{auth()->user()->user_trial}}
         @endif
         </p>
 
